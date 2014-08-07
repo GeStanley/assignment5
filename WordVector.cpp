@@ -67,7 +67,14 @@ int WordVector::size() const
 
 int WordVector::sum_frequency_count() const
 {
-  return 0;
+  int total=0;
+
+  for(MyPair<std::string, int> p : wordvec)
+  {
+    total += p.second;
+  }
+
+  return total;
 }
 
 void WordVector::sort()
