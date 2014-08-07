@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cctype>
 #include <string>
+#include <stdexcept>
 
 #include "MyPair.h"
 #include "WordVector.h"
@@ -81,74 +82,7 @@ void open_input_stream(ifstream& input_file_stream, string& filename)
       throw std::invalid_argument("Could not open input file: " + filename);
    }
 }
-//________________________________________________________________________________________________________________
-
-void TestWordMap(istream& inputStream)
-{
-   if (!inputStream.good())
-      throw std::invalid_argument("bad input stream");
-
-   WordMap wordmap( inputStream );
-   int size = wordmap.size();
-   wordmap.insert("BBB"); wordmap.insert("BBB"); wordmap.insert("BBB");
-   wordmap.insert("AAA"); wordmap.insert("AAA"); wordmap.insert("AAA");
-   wordmap.insert("CCC"); wordmap.insert("CCC"); wordmap.insert("CCC");
-   assert( wordmap.lookup("BBB") == 3 );
-   assert( wordmap.lookup("AAA") == 3 );
-   assert( wordmap.lookup("CCC") == 3 );
-   assert( wordmap.size() == size + 3 );
-
-   wordmap.remove("AAA");
-   assert( wordmap.lookup("AAA") == 0 );
-   wordmap.remove("CCC"); wordmap.remove("CCC");
-   assert( wordmap.lookup("CCC") == 0 );
-   assert( wordmap.size() == size + 1 );
-
-   cout << "\n===========" << endl;
-   cout << "TestWordMap" << endl;
-   cout << "===========" << endl;
-
-   wordmap.print();
-   cout << "-------------------------------" << endl;
-   cout << "WordMap container size :" << wordmap.size() << endl;
-   cout << "WordMap total frequency count :" << wordmap.sum_frequency_count() << endl;
-   cout << "-------------------------------" << endl;
- }
-
-//________________________________________________________________________________________________________________
-
-void TestWordMultiSet(istream& inputStream)
-{
-   if (!inputStream.good())
-      throw std::invalid_argument("bad input stream");
-
-   WordMultiSet wordset( inputStream );
-   int size = wordset.size();
-   wordset.insert("BBB"); wordset.insert("BBB"); wordset.insert("BBB");
-   wordset.insert("AAA"); wordset.insert("AAA"); wordset.insert("AAA");
-   wordset.insert("CCC"); wordset.insert("CCC"); wordset.insert("CCC");
-   assert( wordset.lookup("BBB") == 3 );
-   assert( wordset.lookup("AAA") == 3 );
-   assert( wordset.lookup("CCC") == 3 );
-   assert( wordset.size() == size + 9 );
-
-   wordset.remove("AAA");
-   assert( wordset.lookup("AAA") == 0 );
-   wordset.remove("CCC"); wordset.remove("CCC");
-   assert( wordset.lookup("CCC") == 0 );
-   assert( wordset.size() == size + 3 );
-
-   cout << "\n================" << endl;
-   cout << "TestWordMultiSet" << endl;
-   cout << "================" << endl;
-
-   wordset.print();
-   cout << "-----------------------------------" << endl;
-   cout << "WordMultiSe container size :" << wordset.size() << endl;
-   cout << "WordMultiSe total frequency count :" << wordset.size() << endl;
-   cout << "-----------------------------------" << endl;
-}
-
+///
 //________________________________________________________________________________________________________________
 
 void TestWordVector(istream& inputStream)

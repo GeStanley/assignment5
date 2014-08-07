@@ -11,7 +11,7 @@ class MyPair : public std::pair<K,V>
     MyPair(){};
     MyPair(const K & x, const V & y) : std::pair<K, V>(x,y){}
 
-    friend bool operator====(const MyPair & p1, const MyPair & p2)
+    friend bool operator==(const MyPair & p1, const MyPair & p2)
     {
       return p1.first == p2.first;
     }

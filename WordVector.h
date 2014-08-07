@@ -14,8 +14,8 @@ public:
 
 
   //**** functions    ****//
-  void WordVector::insert(const std::string & word);
-  bool WordVector::remove(const std::string & word);
+  void insert(const std::string & word);
+  bool remove(const std::string & word);
   int lookup(const std::string & word) const;
   void print() const;
   int size() const;
