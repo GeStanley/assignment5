@@ -24,6 +24,6 @@ public:
     
     
 private:
-  std::vector<MyPair<std::string, int>> wordvec;
+  vector<MyPair<std::string, int>> wordvec;
 };
 #endif

@@ -40,11 +40,6 @@ int WordVector::size() const
   return 0;
 }
 
-int WordVector::sum_frequency_count() const
-{
-  return 0;
-}
-
 void WordVector::sort()
 {
   std::sort(wordvec.begin(), wordvec.end(), MyPair<string, int>());
