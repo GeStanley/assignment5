@@ -41,9 +41,9 @@ int main()
       try
       {
          // test WordMap
-         //open_input_stream(inputStream, filename);
-         //TestWordMap(inputStream);
-         //inputStream.close();
+         open_input_stream(inputStream, filename);
+         TestWordMap(inputStream);
+         inputStream.close();
 
          // test WordMultiSet
          //open_input_stream(inputStream, filename);
@@ -83,7 +83,42 @@ void open_input_stream(ifstream& input_file_stream, string& filename)
    }
 }
 ///
+
 //________________________________________________________________________________________________________________
+void TestWordMap(istream& inputStream)
+{
+   if (!inputStream.good())
+      throw std::invalid_argument("bad input stream");
+
+   WordMap wordmap( inputStream );
+   int size = wordmap.size();
+   wordmap.insert("BBB"); wordmap.insert("BBB"); wordmap.insert("BBB");
+   wordmap.insert("AAA"); wordmap.insert("AAA"); wordmap.insert("AAA");
+   wordmap.insert("CCC"); wordmap.insert("CCC"); wordmap.insert("CCC");
+   assert( wordmap.lookup("BBB") == 3 );
+   assert( wordmap.lookup("AAA") == 3 );
+   assert( wordmap.lookup("CCC") == 3 );
+   assert( wordmap.size() == size + 3 );
+
+   wordmap.remove("AAA");
+   assert( wordmap.lookup("AAA") == 0 );
+   wordmap.remove("CCC"); wordmap.remove("CCC");
+   assert( wordmap.lookup("CCC") == 0 );
+   assert( wordmap.size() == size + 1 );
+
+   cout << "\n===========" << endl;
+   cout << "TestWordMap" << endl;
+   cout << "===========" << endl;
+
+   wordmap.print();
+   cout << "-------------------------------" << endl;
+   cout << "WordMap container size :" << wordmap.size() << endl;
+   cout << "WordMap total frequency count :" << wordmap.sum_frequency_count() << endl;
+   cout << "-------------------------------" << endl;
+ }
+
+//________________________________________________________________________________________________________________
+
 
 void TestWordVector(istream& inputStream)
 {
