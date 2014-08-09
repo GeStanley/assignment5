@@ -131,16 +131,16 @@ void TestWordMultiSet(istream& inputStream)
    wordset.insert("BBB"); wordset.insert("BBB"); wordset.insert("BBB");
    wordset.insert("AAA"); wordset.insert("AAA"); wordset.insert("AAA");
    wordset.insert("CCC"); wordset.insert("CCC"); wordset.insert("CCC");
-   //assert( wordset.lookup("BBB") == 3 );
-   //assert( wordset.lookup("AAA") == 3 );
-   //assert( wordset.lookup("CCC") == 3 );
-   //assert( wordset.size() == size + 9 );
+   assert( wordset.lookup("BBB") == 3 );
+   assert( wordset.lookup("AAA") == 3 );
+   assert( wordset.lookup("CCC") == 3 );
+   assert( wordset.size() == size + 9 );
 
    wordset.remove("AAA");
-   //assert( wordset.lookup("AAA") == 0 );
+   assert( wordset.lookup("AAA") == 0 );
    wordset.remove("CCC"); wordset.remove("CCC");
-   //assert( wordset.lookup("CCC") == 0 );
-   //assert( wordset.size() == size + 3 );
+   assert( wordset.lookup("CCC") == 0 );
+   assert( wordset.size() == size + 3 );
 
    cout << "\n================" << endl;
    cout << "TestWordMultiSet" << endl;

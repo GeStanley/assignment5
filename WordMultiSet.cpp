@@ -16,13 +16,19 @@ WordMultiSet::WordMultiSet( std::istream & an_input_stream )
 
 void WordMultiSet::insert(const std::string & word)
 {
-
     wordset.insert( word );
 }
 
 bool WordMultiSet::remove(const std::string & word)
 {
-  return 0;
+  auto p = wordset.equal_range(word);
+
+  if(p.first == p.second)
+    return 0;
+  else{
+    wordset.erase(p.first, p.second);
+    return true;
+  }
 }
 
 int WordMultiSet::lookup(const std::string & word)
@@ -58,9 +64,4 @@ void WordMultiSet::print() const
 int WordMultiSet::size() const
 {
   return wordset.size();
-}
-
-int WordMultiSet::sum_frequency_count() const
-{
-  return 0;
 }

@@ -19,7 +19,6 @@ public:
   int lookup(const std::string & word);
   void print() const;
   int size() const;
-  int sum_frequency_count() const;
 
 private:
   std::multiset<std::string, CompareWords> wordset;
