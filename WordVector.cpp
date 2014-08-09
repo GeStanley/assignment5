@@ -52,27 +52,29 @@ int WordVector::lookup( const std::string & word ) const
     return vit->second;
 }
 
+void printMyPair(MyPair<std::string, int> p)
+{
+  //set the tab offset from the left border
+  int size=0;
+  if(p.second>9)
+    size=2;
+  else
+    size=1;
+
+  int spacing = 4 - size;
+
+  //print out the offset
+  while (spacing > 0){
+    std::cout << " ";
+    spacing--;
+  }
+
+  std::cout << p.second << " : " << p.first << std::endl;
+}
+
 void WordVector::print() const
 {
-  for(MyPair<std::string, int> p : wordvec)
-  {
-    //set the tab offset from the left border
-    int size=0;
-  	if(p.second>9)
-      size=2;
-    else
-      size=1;
-
-    int spacing = 4 - size;
-
-  	//print out the offset
-  	while (spacing > 0){
-  		std::cout << " ";
-  		spacing--;
-  	}
-
-    std::cout << p.second << " : " << p.first << std::endl;
-  }
+  for_each(wordvec.begin(), wordvec.end(), printMyPair);
 }
 
 int WordVector::size() const
@@ -84,10 +86,10 @@ int WordVector::sum_frequency_count() const
 {
   int total=0;
 
-  for(MyPair<std::string, int> p : wordvec)
-  {
-    total += p.second;
-  }
+  for_each(wordvec.begin(), wordvec.end(),
+    [&total](MyPair<std::string, int> p)->void{
+      total += p.second;
+    });
 
   return total;
 }

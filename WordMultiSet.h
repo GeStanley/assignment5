@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "CompareWords.h"
 
 class WordMultiSet
 {
@@ -21,6 +22,6 @@ public:
   int sum_frequency_count() const;
 
 private:
-  std::multiset<std::string, CompareWords> wordset;
+  //std::multiset<std::string, CompareWords> wordset;
 };
 #endif
