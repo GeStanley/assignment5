@@ -39,11 +39,14 @@ int WordMultiSet::lookup(const std::string & word)
   return count;
 }
 
-void printString(const std::string word)
+void printElement(const std::string word, const int wordSize)
 {
   //set the tab offset from the left border
   int size=0;
-
+  if(wordSize>9)
+    size=2;
+  else
+    size=1;
 
   int spacing = 4 - size;
 
@@ -53,12 +56,34 @@ void printString(const std::string word)
     spacing--;
   }
 
-  std::cout << " : " << word << std::endl;
+  std::cout << wordSize << " : " << word << std::endl;
 }
 
 void WordMultiSet::print() const
 {
-  for_each(wordset.begin(), wordset.end(), printString);
+  int wordSize = 0;
+
+  std::multiset<std::string>::iterator it;
+  it = wordset.begin();
+  std::string previousWord = *it;
+
+  std::cout << "initializing previous word to : " << previousWord << std::endl;
+
+  for_each(wordset.begin(), wordset.end(),
+    [&wordSize, &previousWord](std::string word)->void{
+      if(previousWord==word)
+      {
+        ++wordSize;
+      }
+      else
+      {
+        printElement(previousWord, wordSize);
+        previousWord = word;
+        wordSize = 1;
+      }
+    });
+  //print the last word in the list.
+  printElement(previousWord, wordSize);
 }
 
 int WordMultiSet::size() const
