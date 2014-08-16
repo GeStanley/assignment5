@@ -58,7 +58,7 @@ void printPair(std::pair<std::string, int> p)
   else
     size=1;
 
-  int spacing = 4 - size;
+  int spacing = 3 - size;
 
   //print out the offset
   while (spacing > 0){

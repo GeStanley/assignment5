@@ -48,7 +48,7 @@ void printElement(const std::string word, const int wordSize)
   else
     size=1;
 
-  int spacing = 4 - size;
+  int spacing = 3 - size;
 
   //print out the offset
   while (spacing > 0){
@@ -67,7 +67,6 @@ void WordMultiSet::print() const
   it = wordset.begin();
   std::string previousWord = *it;
 
-  std::cout << "initializing previous word to : " << previousWord << std::endl;
 
   for_each(wordset.begin(), wordset.end(),
     [&wordSize, &previousWord](std::string word)->void{
