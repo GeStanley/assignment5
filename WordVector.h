@@ -21,8 +21,8 @@ public:
   int size() const;
   int sum_frequency_count() const;
   void sort();
-    
-    
+
+  void operator()(const std::string word);
 private:
   std::vector<MyPair<std::string, int>> wordvec;
 };

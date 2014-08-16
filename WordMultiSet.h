@@ -20,6 +20,7 @@ public:
   void print() const;
   int size() const;
 
+  void operator()(const std::string word);
 private:
   std::multiset<std::string, CompareWords> wordset;
 };

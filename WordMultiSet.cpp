@@ -6,12 +6,8 @@
 
 WordMultiSet::WordMultiSet( std::istream & an_input_stream )
 {
-  std::string currentWord="";
-
-  while(an_input_stream >> currentWord)
-  {
-    insert(currentWord);
-  }
+  std::istream_iterator<std::string> start(an_input_stream), finish;
+  *this = for_each(start, finish, *this);
 }
 
 void WordMultiSet::insert(const std::string & word)
@@ -21,20 +17,23 @@ void WordMultiSet::insert(const std::string & word)
 
 bool WordMultiSet::remove(const std::string & word)
 {
+  //find the range equal to word
   auto p = wordset.equal_range(word);
 
   if(p.first == p.second)
-    return 0;
+    return 0; //nothing found
   else{
-    wordset.erase(p.first, p.second);
+    wordset.erase(p.first, p.second); //remove the entire range
     return true;
   }
 }
 
 int WordMultiSet::lookup(const std::string & word)
 {
+  //find the range equal to word
   auto p = wordset.equal_range(word);
 
+  //count the amount of elements
   int count = std::distance(p.first, p.second);
   return count;
 }
@@ -71,13 +70,16 @@ void WordMultiSet::print() const
   for_each(wordset.begin(), wordset.end(),
     [&wordSize, &previousWord](std::string word)->void{
       if(previousWord==word)
-      {
+      { //the words are equals. increase count.
         ++wordSize;
       }
       else
-      {
+      { //the word changed. print the previous word
+        //and it's size
         printElement(previousWord, wordSize);
+        //change previous word
         previousWord = word;
+        //restart the count
         wordSize = 1;
       }
     });
@@ -88,4 +90,11 @@ void WordMultiSet::print() const
 int WordMultiSet::size() const
 {
   return wordset.size();
+}
+
+//function operator to insert a word into the map.
+//used by the constructor
+void WordMultiSet::operator()(const std::string word)
+{
+  insert(word);
 }
